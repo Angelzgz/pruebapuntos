@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Conectar a tu base de datos MySQL
     $servername = "sql8.freemysqlhosting.net";
     $username = "sql8718276";
-    $password = "tu_contraseña";
+    $password = "07120712aA!";
     $dbname = "sql8718276";
 
     // Crear una conexión utilizando MySQLi
