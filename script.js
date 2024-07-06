@@ -1,10 +1,4 @@
 // script.js
-const map = L.map('map').setView([40.4168, -3.7038], 6); // Centra el mapa en España
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-}).addTo(map);
-
 // Función para agregar marcadores al hacer doble clic en el mapa
 function onMapClick(e) {
     const popupContent = `
@@ -30,17 +24,3 @@ function onMapClick(e) {
 }
 
 map.on('dblclick', onMapClick);
-
-// Función para guardar los datos del marcador en la base de datos
-function guardarDatos() {
-    const form = document.getElementById('markerForm');
-    const formData = new FormData(form);
-
-    axios.post('http://localhost/mapa_puntos/guardar_datos.php', Object.fromEntries(formData))
-        .then(response => {
-            console.log('Datos guardados correctamente');
-        })
-        .catch(error => {
-            console.error('Error al guardar en la base de datos:', error);
-        });
-}
