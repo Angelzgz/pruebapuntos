@@ -1,4 +1,5 @@
 // script.js
+
 let map;
 let markers = [];
 
@@ -42,6 +43,7 @@ function guardarDatos() {
         valoracion: valoracion
     };
 
+    // Ejemplo de uso de Axios para hacer una petición POST
     axios.post('http://localhost/mapa_puntos/guardar_datos.php', data)
         .then(response => {
             console.log('Datos guardados correctamente:', response);
