@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mapa de Puntos de Carga</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
     <style>
         body, html {
             height: 100%;
@@ -14,7 +13,6 @@
         }
         #map {
             height: 80vh;
-            width: 100%;
         }
         #formulario {
             position: absolute;
@@ -29,15 +27,20 @@
 <body>
     <div id="map"></div>
     <div id="formulario">
+        <h3>Agregar Punto de Carga</h3>
         <form id="markerForm">
-            <label for="nombre">Nombre del punto de carga:</label><br>
-            <input type="text" id="nombre" name="nombre"><br>
+            <label for="nombre">Nombre:</label><br>
+            <input type="text" id="nombre" name="nombre" required><br>
+            <label for="latitud">Latitud:</label><br>
+            <input type="text" id="latitud" name="latitud" required><br>
+            <label for="longitud">Longitud:</label><br>
+            <input type="text" id="longitud" name="longitud" required><br>
             <label for="velocidad">Velocidad de carga:</label><br>
-            <input type="text" id="velocidad" name="velocidad"><br>
+            <input type="text" id="velocidad" name="velocidad" required><br>
             <label for="horario">Horario de funcionamiento:</label><br>
-            <input type="text" id="horario" name="horario"><br>
+            <input type="text" id="horario" name="horario" required><br>
             <label for="valoracion">Valoración:</label><br>
-            <select id="valoracion" name="valoracion">
+            <select id="valoracion" name="valoracion" required>
                 <option value="perfecto">👍 Verde - Perfecto</option>
                 <option value="aceptable">😐 Amarillo - Aceptable</option>
                 <option value="mejorable">😕 Naranja - Mejorable</option>
@@ -48,16 +51,8 @@
     </div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
+    <!-- Incluir Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
-
-    <script>
-        const map = L.map('map').setView([40.4168, -3.7038], 6); // Centra el mapa en España
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-        }).addTo(map);
-    </script>
 </body>
 </html>

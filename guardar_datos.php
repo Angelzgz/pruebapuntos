@@ -3,35 +3,41 @@
 
 // Recibir datos
 $nombre = $_POST['nombre'];
+$latitud = $_POST['latitud'];
+$longitud = $_POST['longitud'];
 $velocidad = $_POST['velocidad'];
 $horario = $_POST['horario'];
 $valoracion = $_POST['valoracion'];
 
-// Aquí deberías implementar la lógica para guardar en tu base de datos
-// Por ejemplo, usando MySQL o cualquier otra base de datos que prefieras
-
-// Ejemplo de conexión a MySQL utilizando MySQLi
+// Conexión a la base de datos (ejemplo utilizando PDO)
 $servername = "sql8.freemysqlhosting.net";
 $username = "sql8718276";
 $password = "07120712aA!";
 $dbname = "sql8718276";
 
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
+    // Preparar consulta SQL
+    $stmt = $conn->prepare("INSERT INTO puntos_de_carga (nombre, latitud, longitud, velocidad, horario, valoracion) 
+                            VALUES (:nombre, :latitud, :longitud, :velocidad, :horario, :valoracion)");
 
-// Preparar y ejecutar consulta SQL
-$sql = "INSERT INTO puntos_de_carga (nombre, velocidad, horario, valoracion) VALUES ('$nombre', '$velocidad', '$horario', '$valoracion')";
+    // Bind parameters
+    $stmt->bindParam(':nombre', $nombre);
+    $stmt->bindParam(':latitud', $latitud);
+    $stmt->bindParam(':longitud', $longitud);
+    $stmt->bindParam(':velocidad', $velocidad);
+    $stmt->bindParam(':horario', $horario);
+    $stmt->bindParam(':valoracion', $valoracion);
 
-if ($conn->query($sql) === TRUE) {
+    // Ejecutar consulta
+    $stmt->execute();
+
     echo "Datos guardados correctamente";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+} catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
 }
 
-$conn->close();
+$conn = null;
 ?>
